@@ -16,9 +16,23 @@ async function destroy(req, res) {
     res.sendStatus(204)
 }
 
+async function update(req, res) {
+    const updatedReview = { ...res.locals.review, ...req.body.data };
+    await service.update(updatedReview);
+    const reviewToReturn = await service.getReviewWithCritic(
+      res.locals.review.review_id
+    );
+    res.json({ data: reviewToReturn });
+  }
+
 module.exports = {
     delete: [
         asyncErrorBoundary(reviewExists),
         asyncErrorBoundary(destroy)
+    ],
+
+    update: [
+        asyncErrorBoundary(reviewExists),
+        asyncErrorBoundary(update)
     ],
 }
