@@ -11,7 +11,7 @@ const {
 const URL =
   NODE_ENV === "production"
     ? PRODUCTION_DATABASE_URL
-    : DEVELOPMENT_DATABASE_URL;
+    : DEVELOPMENT_DATABASE_URL
 
 
 module.exports = {

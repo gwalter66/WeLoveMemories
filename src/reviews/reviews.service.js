@@ -26,7 +26,7 @@ const mapCriticInfo = mapProperties({
       .where({ review_id: reviewId })
       .first()
       .then((result) => {
-        const updatedReview = addCriticDetails(result);
+        const updatedReview = mapCriticInfo(result);
         return updatedReview;
       });
   }

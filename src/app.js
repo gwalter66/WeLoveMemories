@@ -3,12 +3,18 @@ const express = require("express");
 
 const moviesRouter = require("./movies/movies.router.js")
 const reviewsRouter = require("./reviews/reviews.router.js")
+const theatersRouter = require("./theaters/theaters.router.js")
+
+const cors = require("cors")
 
 const app = express();
+app.use(cors())
 app.use(express.json())
 
 app.use("/movies", moviesRouter)
 app.use("/reviews", reviewsRouter)
+app.use("/theaters", theatersRouter)
+
 
 //not found handler
 app.use((req, res, next) => {
