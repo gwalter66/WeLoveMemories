@@ -2,11 +2,13 @@ if (process.env.USER) require("dotenv").config();
 const express = require("express");
 
 const moviesRouter = require("./movies/movies.router.js")
+const reviewsRouter = require("./reviews/reviews.router.js")
 
 const app = express();
 app.use(express.json())
 
 app.use("/movies", moviesRouter)
+app.use("/reviews", reviewsRouter)
 
 //not found handler
 app.use((req, res, next) => {
