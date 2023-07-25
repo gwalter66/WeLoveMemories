@@ -1,9 +1,11 @@
 const knex = require("../db/connection")
 
+//list all movies
 function list() {
     return knex("movies").select("*")
 }
 
+// get all movies where is_showing is true
 function listIsShowing() {
     return knex('movies as m')
     .join('movies_theaters as mt', 'm.movie_id', 'mt.movie_id')
@@ -12,10 +14,12 @@ function listIsShowing() {
     .groupBy('m.movie_id')
 }
 
+//get movie for specific movie_id
 function read(movie_id) {
     return knex("movies").select("*").where({ movie_id }).first()
 }
 
+// list all movie theaters with movies 
 function readMoviesTheaters() {
     return knex('movies_theaters as mt')
         .join("movies as m", "m.movie_id", "mt.movie_id")
@@ -24,6 +28,8 @@ function readMoviesTheaters() {
         .groupBy("t.theater_id")
 }
 
+
+// map the review content so critic information is in an object
 function addCritic(movies) {
     return movies.map((movie) => {
         return {
@@ -46,6 +52,7 @@ function addCritic(movies) {
     })
 }
 
+// list all movie reviews for a particular movieId with critic information
 function listMovieReviews(movieId) {
     console.log(movieId)
     return knex('movies as m')

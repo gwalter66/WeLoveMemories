@@ -1,6 +1,7 @@
 const knex = require("../db/connection")
 const reduceProperties = require("../utils/reduce-properties")
 
+// remove undesired fields from the list
 const reduceMovies = reduceProperties("theater_id", {
   movie_id: ["movies", null, "movie_id"],
   title: ["movies", null, "title"],
@@ -11,6 +12,7 @@ const reduceMovies = reduceProperties("theater_id", {
   is_showing: ["movies", null, "is_showing"],
 });
 
+// list all theaters with the movies they show
 function list() {
   return knex("theaters as t")
     .join("movies_theaters as mt", "mt.theater_id", "t.theater_id")
